@@ -1,0 +1,52 @@
+import React from 'react';
+import clsx from 'clsx';
+import Link from '@docusaurus/Link';
+import Layout from '@theme/Layout';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCopy } from '@fortawesome/free-regular-svg-icons';
+import HomepageFeatures from '@site/src/components/HomepageFeatures';
+
+import styles from './index.module.css';
+
+const onClick = async () => {
+  navigator.clipboard.writeText("npx svgo");
+}
+
+function HomepageHeader() {
+  const { siteConfig } = useDocusaurusContext();
+
+  return (
+    <header className={clsx('hero--primary', styles.heroBanner)}>
+      <div className="container">
+        <h1 className={clsx(styles.heroTitle)}>{siteConfig.title}</h1>
+        <p className="hero__subtitle">{siteConfig.tagline}</p>
+        <div className={styles.buttons}>
+          <Link
+            className="button button--secondary button--lg"
+            to="/docs/introduction">
+            Get Started
+          </Link>
+        </div>
+        <div className={clsx(styles.installInstructions)} onClick={onClick}>
+          $ npx svgo
+          <span className={clsx(styles.cursor)}>█</span>
+          <span className={clsx(styles.copyIcon)}>
+            <FontAwesomeIcon icon={faCopy}/>
+          </span>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+export default function Home() {
+  return (
+    <Layout>
+      <HomepageHeader />
+      <main>
+        <HomepageFeatures />
+      </main>
+    </Layout>
+  );
+}
