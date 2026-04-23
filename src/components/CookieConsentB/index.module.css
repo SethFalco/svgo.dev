@@ -1,0 +1,264 @@
+@font-face {
+  font-family: "Scabber";
+  src: url("./assets/Scabber.woff2") format("woff2");
+}
+
+.bannerContainer,
+.mascot {
+  --drop-shadow-color: #000f19;
+  filter: drop-shadow(.1rem .2rem .3rem var(--drop-shadow-color));
+}
+
+.mascot {
+  z-index: 1;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 8rem;
+  margin: .5rem;
+  /* Work around Safari behavior which enforces arbitrary width if not
+     explicitly defined. */
+  aspect-ratio: 1.06;
+
+  @media (min-width: 997px) {
+    bottom: 5rem;
+    height: 12rem;
+  }
+}
+
+.speechBubble {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  inset: 0;
+  z-index: -1;
+
+  svg {
+    height: 100%;
+    width: 100%;
+  }
+
+  &.speechBubbleWide {
+    display: none;
+    max-width: 480px;
+    line-height: 120%;
+  }
+
+  @media (min-width: 997px) {
+    display: none;
+
+    &.speechBubbleWide {
+      display: block;
+    }
+  }
+}
+
+.bannerContainer {
+
+  p,
+  button,
+  svg {
+    font-family:
+      Scabber, ui-rounded, 'Hiragino Maru Gothic ProN', Quicksand, Comfortaa, Manjari, 'Arial Rounded MT',
+      'Arial Rounded MT Bold', Calibri, source-sans-pro, sans-serif;
+    font-size: clamp(12px, 3cqw, 15px);
+    font-weight: 500;
+    color: #331E04;
+  }
+
+  z-index: 2;
+  position: fixed;
+  bottom: 5.6rem;
+  left: 5.6rem;
+  background-size: 100% 100%;
+  margin-right: .5rem;
+  max-width: 360px;
+  aspect-ratio: 1.15;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  line-height: clamp(110%, 5cqw, 145%);
+
+  @media (min-width: 997px) {
+    left: 10rem;
+    bottom: 6rem;
+    max-width: 480px;
+    aspect-ratio: 2.45;
+    line-height: 120%;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    background: no-repeat url('./assets/cookie1.svg');
+    top: 14%;
+    left: -8%;
+    width: 26%;
+    aspect-ratio: 0.84;
+    clip-path: polygon(0 0, 100% 0, 94% 26%, 90% 47%, 73% 63%, 56% 72%, 54% 91%, 0 100%);
+
+    @media (min-width: 997px) {
+      rotate: 15deg;
+      left: 2%;
+      top: -12%;
+      width: 21%;
+    }
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    background: no-repeat url('./assets/cookie2.svg');
+    bottom: 1rem;
+    right: 0;
+    width: 25%;
+    aspect-ratio: 0.83;
+    clip-path: polygon(0 58%, 11% 36%, 52% 20%, 66% 0, 100% 0, 100% 100%, 0 100%);
+
+    @media (min-width: 997px) {
+      right: -2%;
+      bottom: -.8rem;
+      width: 20%;
+    }
+  }
+}
+
+.title {
+  background: no-repeat url('./assets/heading-background.svg');
+  position: absolute;
+  top: -4%;
+  left: 12%;
+  width: clamp(170px, 44vw, 210px);
+  aspect-ratio: 2.75;
+  /** Due of all the curves, the bounding box for the title and text can
+      sometimes overlap. We use a clip-path to limit the user-selectable area so
+      they can freely interact with the text beneath any empty space. */
+  clip-path: polygon(0 100%, 17% 100%, 28% 75%, 46% 55%, 69% 51%, 91% 71%, 100% 63%, 100% 0, 0 5%);
+
+  text {
+    color: #f4f2e5;
+  }
+
+  .curveWide {
+    display: none;
+  }
+
+  @media (min-width: 997px) {
+    .curve {
+      display: none;
+    }
+
+    .curveWide {
+      display: block;
+    }
+
+    background-image: url('./assets/heading-background-wide.svg');
+    top: -6%;
+    left: 21%;
+    width: 260px;
+    clip-path: rect(0 100% 62% 0);
+  }
+}
+
+.copy {
+  /* Hack to workaround issue where I don't want to specify a height, yet I must
+     for the child floating elements to be able to inherit it. Sets the height
+     to a larger value as the width gets smaller. Value is hardcoded from
+     trial-and-error. */
+  height: clamp(100%, calc((640px - 100vw)), 100vh);
+  margin-bottom: 0;
+  --shape-margin: 1%;
+
+  &::before {
+    content: '';
+    float: left;
+    width: 50%;
+    height: 100%;
+    shape-margin: var(--shape-margin);
+    shape-outside: polygon(0 0, 0 100%, 100% 100%, 100% 82%, 69% 87%, 39% 87%, 15% 78%, 8% 67%, 7% 51%, 13% 38%, 25% 34%, 29% 27%, 46% 16%, 61% 15%, 100% 15%, 100% 0);
+
+    @media (min-width: 997px) {
+      shape-outside: polygon(0 0, 100% 0, 100% 19%, 40% 19%, 24% 35%, 19% 53%, 23% 79%, 31% 87%, 51% 92%, 100% 88%, 100% 100%, 0 100%);
+    }
+  }
+
+  .float {
+    content: '';
+    float: right;
+    width: 50%;
+    height: 100%;
+    shape-margin: var(--shape-margin);
+    shape-outside: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 82%, 30% 82%, 53% 81%, 54% 76%, 62% 72%, 83% 64%, 93% 50%, 80% 29%, 57% 15%, 19% 15%, 0 15%);
+
+    @media (min-width: 997px) {
+      shape-outside: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 88%, 60% 91%, 89% 55%, 63% 25%, 39% 19%, 0 19%);
+    }
+  }
+
+  @media (min-width: 997px) {
+    --shape-margin: 1.7%;
+  }
+}
+
+.buttonContainer {
+  width: 180px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: -5.4rem;
+  left: 18%;
+
+
+  @media (min-width: 997px) {
+    width: 410px;
+    left: 28%;
+    bottom: -5rem;
+    flex-direction: row;
+
+    button {
+      width: 200px;
+    }
+  }
+}
+
+.button {
+  cursor: pointer;
+  width: 85%;
+  border: none;
+  background: none;
+  position: relative;
+
+  &.acceptButton {
+    align-self: flex-end;
+  }
+
+  .bubble {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    aspect-ratio: 2.5;
+  }
+
+  .label {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hover {
+    display: none;
+  }
+
+  &:hover, &:focus {
+    .bubble {
+      display: none;
+    }
+
+    .hover {
+      display: flex;
+    }
+  }
+}
