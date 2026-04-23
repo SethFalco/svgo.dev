@@ -1,0 +1,22 @@
+.bannerContainer {
+  --svgo-pri-bg-color: #fff;
+  --svgo-pri-fg-color: #153243;
+  --svgo-button-hover-background-color: #1b4055;
+
+  z-index: 1;
+  background: #fff;
+  color: var(--svgo-pri-fg-color);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 2rem;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 1rem;
+
+  button {
+    padding: .5rem 1rem;
+  }
+}
